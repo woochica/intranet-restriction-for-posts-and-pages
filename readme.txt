@@ -22,18 +22,15 @@ Allows to restrict the access of specific posts and pages to intranet only.
 
 == Frequently Asked Questions ==
 
-= How can I specify my intranet?
+= How can I specify my intranet? =
 
 Intranet is defined by domains names and IP ranges.
 
-Go to the options page of the plugin, and add domain names and IP ranges to the
-textarea.  Put each of them in newline.  IP ranges are expected in the format
-`address/mask`, e.g. `192.168.0.0/255.255.0.0`.
+Go to the options page of the plugin, and add domain names and IP ranges to the textarea.  Put each of them in newline.  IP ranges are expected in format `address/mask`, e.g. `192.168.0.0/255.255.0.0`.
 
-= What if I clear all domains and IP ranges on the options page?
+= What if I clear all domains and IP ranges on the options page? =
 
-Then, as you expect, restriction will have no effect.  Everyone will access all
-of your posts and pages, even those marked as restricted.
+Then, as you expect, restriction will have no effect.  Everyone will access all of your posts and pages, even those marked as restricted.
 
 == Screenshots ==
 
