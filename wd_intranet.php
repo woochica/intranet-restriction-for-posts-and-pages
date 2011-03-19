@@ -8,14 +8,55 @@ Author URI: http://webdevil.hu/
 License: BSD
 */
 
+register_activation_hook(__FILE__,'wd_intranet_install');
+register_deactivation_hook( __FILE__, 'wd_intranet_remove');
+
 add_filter('the_posts', 'wd_intranet_filter_posts', 1);
 add_filter('get_pages', 'wd_intranet_filter_posts', 1);
 
 add_action('edit_post', 'wd_intranet_update');
 add_action('save_post', 'wd_intranet_update');
 add_action('publish_post', 'wd_intranet_update');
-add_action('admin_menu', 'wd_add_custom_box');
 
+add_action('admin_menu', 'wd_add_custom_box');
+add_action('admin_menu', 'wd_intranet_admin_settings_menu');
+
+
+function wd_intranet_install() {
+    add_option("wd_intranet_data", "192.168.0.0/255.255.0.0\n10.0.0.0/255.0.0.0", '', 'yes');
+}
+
+
+function wd_intranet_remove() {
+    delete_option('wd_intranet_data');
+}
+
+
+function wd_intranet_admin_settings_menu() {
+    add_options_page(
+        __('Intranet Restriction'),
+        __('Intranet Restriction'),
+        'administrator',
+        'wd-intranet',
+        'wd_intranet_admin_settings_page'
+    );
+}
+
+function wd_intranet_admin_settings_page() {
+    ?>
+    <div class="wrap">
+        <h2><?php _e('Intranet Restriction Settings') ?></h2>
+        <p>Specify domain names and IP ranges. Put each of them in separate line.</p>
+        <form method="post" action="options.php">
+        <?php wp_nonce_field('update-options'); ?>
+        <textarea cols="50" rows="10" name="wd_intranet_data"><?php echo get_option('wd_intranet_data'); ?></textarea>
+        <input type="hidden" name="action" value="update" />
+        <input type="hidden" name="page_options" value="wd_intranet_data" />
+        <br/><input type="submit" value="<?php _e('Save Changes') ?>" />
+        </form>
+   </div>
+   <?php
+}
 
 /**
  * Filters posts
@@ -123,16 +164,44 @@ function wd_intranet_match_network($nets, $ip, $first=false) {
  * Returns true if client is from intranet
  */
 function wd_intranet_is_intranet() {
-    $reverse = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-    if (preg_match('/(sote\.hu)|(hupe\.hu)|(usn\.hu)|(popbitch\.hu)$/i', $reverse)) {
-        return TRUE;
+    $settings = wd_intranet_parse_data();
+    // check reverse names
+    if (count($settings['reverse']) > 0) {
+        $client_reverse = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $reverse_pattern = '/('.implode(')|(', str_replace('.', '\.', $settings['reverse'])).')$/i';
+        if (preg_match($reverse_pattern, $client_reverse)) {
+            return TRUE;
+        }
     }
-    $ip_etk = wd_intranet_match_network('195.111.73.0/255.255.255.224', $_SERVER['REMOTE_ADDR']);
-    $ip_hupe = wd_intranet_match_network('193.6.214.0/255.255.255.0',$_SERVER['REMOTE_ADDR']);
-    $ip_192 = wd_intranet_match_network('192.168.0.0/255.255.0.0',$_SERVER['REMOTE_ADDR']);
-    $ip_10 = wd_intranet_match_network('10.0.0.0/255.0.0.0',$_SERVER['REMOTE_ADDR']);
-    if ($ip_192 || $ip_10 || $ip_hupe || $ip_etk) {
-        return TRUE;
+    // check ip ranges
+    if (count($settings['ipmask']) > 0) {
+        foreach($settings['ipmask'] as $mask) {
+            if (wd_intranet_match_network($mask, $_SERVER['REMOTE_ADDR'])) {
+                return TRUE;
+            }
+        }
     }
     return FALSE;
+}
+
+
+/**
+ * Parses settings data and returns IP mask and reverse list
+ */
+function wd_intranet_parse_data() {
+    $data = explode("\n", get_option('wd_intranet_data'));
+    $ipmask_list = array();
+    $reverse_list = array();
+    foreach($data as $line) {
+        $line = trim($line);
+        if (is_numeric($line[0])) {
+            $ipmask_list[] = $line;
+        } else {
+            $reverse_list[] = $line;
+        }
+    }
+    return array(
+        'ipmask' => $ipmask_list,
+        'reverse' => $reverse_list
+    );
 }
