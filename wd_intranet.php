@@ -9,30 +9,13 @@ License: BSD
 */
 
 add_filter('the_posts', 'wd_intranet_filter_posts', 1);
-add_filter('get_pages', 'wd_intranet_get_pages', 1);
+add_filter('get_pages', 'wd_intranet_filter_posts', 1);
 
 add_action('edit_post', 'wd_intranet_update');
 add_action('save_post', 'wd_intranet_update');
 add_action('publish_post', 'wd_intranet_update');
 add_action('admin_menu', 'wd_add_custom_box');
 
-
-/**
- * Filters pages
- */
-function wd_intranet_get_pages($pages) {
-    if (is_admin() || wd_intranet_is_intranet()) {
-        return $pages;
-    }
-    $filtered = array();
-    foreach($pages as $page) {
-        $restrict_intranet = get_post_meta($page->ID, 'wd_restrict_intranet', true);
-        if (!$restrict_intranet) {
-            $filtered[] = $page;
-        }
-    }
-    return $filtered;
-}
 
 /**
  * Filters posts
