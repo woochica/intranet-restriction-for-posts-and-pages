@@ -67,7 +67,7 @@ function wd_add_custom_box() {
  * Prints the inner fields for the custom post/page section
  */
 function wd_inner_custom_box() {
-  echo '<input type="hidden" name="intranet_noncename" id="intranet_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
+  echo '<input type="hidden" name="wd_intranet_noncename" id="wd_intranet_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 
   global $post;
   $restrict_intranet = get_post_meta($post->ID, 'wd_restrict_intranet', true);
@@ -90,7 +90,7 @@ function wd_inner_custom_box() {
 function wd_intranet_update($id) {
     // verify this came from the our screen and with proper authorization,
     // because save_post can be triggered at other times
-    if (!wp_verify_nonce( $_POST['intranet_noncename'], plugin_basename(__FILE__) )) {
+    if (!wp_verify_nonce( $_POST['wd_intranet_noncename'], plugin_basename(__FILE__) )) {
         return $post_id;
     }
 
