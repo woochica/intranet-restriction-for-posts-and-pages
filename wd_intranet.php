@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Intranet Restriction
-Description: Allow to restrict posts and pages to intranet.
+Description: Allows to restrict posts and pages to intranet.  Adds an extra option to pages and posts in the admin to mark contents restricted.  The intranet can defined by reverse domains and IP ranges.
 Version: 0.1
 Author: Webdevil
 Author URI: http://webdevil.hu/
