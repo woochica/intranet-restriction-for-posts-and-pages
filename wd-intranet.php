@@ -5,7 +5,6 @@ Description: Allows to restrict the access of specific posts and pages to intran
 Version: 0.1
 Author: Webdevil
 Author URI: http://webdevil.hu/
-License: BSD
 */
 
 register_activation_hook( __FILE__,'wd_intranet_install' );
