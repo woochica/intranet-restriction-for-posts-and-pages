@@ -45,8 +45,8 @@ function wd_intranet_admin_settings_menu() {
 function wd_intranet_admin_settings_page() {
     ?>
     <div class="wrap">
-        <h2><?php _e('Intranet Restriction Settings') ?></h2>
-        <p>Specify domain names and IP ranges. Put each of them in separate line.</p>
+        <h2><?php _e('Intranet Restriction Settings'); ?></h2>
+        <p><?php _e('Specify domain names and IP ranges. Put each of them in separate line.'); ?> </p>
         <form method="post" action="options.php">
         <?php wp_nonce_field('update-options'); ?>
         <textarea cols="50" rows="10" name="wd_intranet_data"><?php echo get_option('wd_intranet_data'); ?></textarea>
