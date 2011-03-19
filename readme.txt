@@ -13,7 +13,7 @@ Allows to restrict the access of specific posts and pages to intranet only.
 Allows to restrict the access of specific posts and pages to intranet only.
 
 *   Adds an extra option to pages and posts in the admin panel where contents may be marked as restricted.
-*   Intranet can defined by domain names and IP ranges.
+*   Intranet can defined by domain names and IP ranges (address/mask).
 
 == Installation ==
 
@@ -23,6 +23,8 @@ Allows to restrict the access of specific posts and pages to intranet only.
 == Frequently Asked Questions ==
 
 == Screenshots ==
+
+1. Enable the checkbox to restrict the access of a page.
 
 == Changelog ==
 
