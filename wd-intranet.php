@@ -7,6 +7,10 @@ Author: Webdevil
 Author URI: http://webdevil.hu/
 */
 
+/**
+ * @author slink
+ */
+
 register_activation_hook( __FILE__,'wd_intranet_install' );
 register_deactivation_hook( __FILE__, 'wd_intranet_remove' );
 
