@@ -24,6 +24,8 @@ Allows to restrict the access of specific posts and pages to intranet only.
 
 == Screenshots ==
 
+1. Enable the checkbox to restrict the access of a page.
+
 == Changelog ==
 
 = 0.1 =
