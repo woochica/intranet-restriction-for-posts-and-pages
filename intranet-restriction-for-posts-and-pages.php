@@ -88,8 +88,8 @@ function wd_add_custom_box() {
  */
 function wd_add_custom_box() {
     if ( function_exists( 'add_meta_box' ) ) {
-        add_meta_box( 'wd_intranet', __('Intranet'), 'wd_inner_custom_box', 'page', 'side', 'default' );
-        add_meta_box( 'wd_intranet', __('Intranet'), 'wd_inner_custom_box', 'post', 'side', 'default' );
+        add_meta_box( 'wd_intranet', __('Intranet Restriction'), 'wd_inner_custom_box', 'page', 'side', 'default' );
+        add_meta_box( 'wd_intranet', __('Intranet Restriction'), 'wd_inner_custom_box', 'post', 'side', 'default' );
     }
 }
 
