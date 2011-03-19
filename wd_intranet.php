@@ -57,8 +57,8 @@ function wd_intranet_filter_posts($posts) {
  */
 function wd_add_custom_box() {
     if (function_exists('add_meta_box')) {
-        add_meta_box('wd_intranet', 'Intranet', 'wd_inner_custom_box', 'page', 'normal', 'high');
-        add_meta_box('wd_intranet', 'Intranet', 'wd_inner_custom_box', 'post', 'normal', 'high');
+        add_meta_box('wd_intranet', __('Intranet'), 'wd_inner_custom_box', 'page', 'normal', 'high');
+        add_meta_box('wd_intranet', __('Intranet'), 'wd_inner_custom_box', 'post', 'normal', 'high');
     }
 }
 
@@ -78,7 +78,7 @@ function wd_inner_custom_box() {
        <?php else: ?>
        <input type="checkbox" name="restrict_intranet" value="1" id="restrict_intranet" />
        <?php endif; ?>
-       <label for="restrict_intranet">Restrict to intranet</label>
+       <label for="restrict_intranet"><?php _e('Restrict to Intranet'); ?></label>
   </div>
 <?php
 }
