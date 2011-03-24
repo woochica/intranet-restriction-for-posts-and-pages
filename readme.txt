@@ -35,6 +35,7 @@ Then, as you'd expect, restriction would have no effect.  Everyone may access al
 == Screenshots ==
 
 1. Enable the checkbox to restrict the access of a page.
+2. You can configure the plugin under the 'Settings' page.
 
 == Changelog ==
 
