@@ -40,7 +40,7 @@ function intranet_restriction_admin_settings_menu() {
         __('Intranet Restriction'),
         __('Intranet Restriction'),
         'administrator',
-        'wd-intranet',
+        'intranet-restriction',
         'intranet_restriction_admin_settings_page'
     );
 }
