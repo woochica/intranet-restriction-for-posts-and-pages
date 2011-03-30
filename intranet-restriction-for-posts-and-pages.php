@@ -83,10 +83,6 @@ function intranet_restriction_filter_posts( $posts ) {
  * Adds a custom section to admin
  */
 function wd_add_custom_box() {
-/**
- * Adds a custom section to admin
- */
-function wd_add_custom_box() {
     if ( function_exists( 'add_meta_box' ) ) {
         add_meta_box( 'wd_intranet', __('Intranet Restriction'), 'wd_inner_custom_box', 'page', 'side', 'default' );
         add_meta_box( 'wd_intranet', __('Intranet Restriction'), 'wd_inner_custom_box', 'post', 'side', 'default' );
